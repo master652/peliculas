@@ -10,25 +10,46 @@ class MovieSlider extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Text(
               'Populares',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-          ListView.builder(
-            itemCount: 20,
-            itemBuilder: (_, int index) {
-              return Container(
-                width: 130,
-                height: 190,
-                color: Colors.green,
-              );
-            },
-          )
+          Expanded(
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 20,
+                  itemBuilder: (_, int index) => _MoviePoster()))
         ],
       ),
+    );
+  }
+}
+
+class _MoviePoster extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 130,
+      height: 190,
+      color: Colors.green,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 10,
+      ),
+      child: Column(children: const [
+        FadeInImage(
+          placeholder: AssetImage('assets/noimg.jpg'),
+          image: NetworkImage('https://via.placeholder.com/300x400'),
+          width: 130,
+          height: 190,
+          fit: BoxFit.cover,
+        ),
+        Text(
+          'StarWars',
+        )
+      ]),
     );
   }
 }
